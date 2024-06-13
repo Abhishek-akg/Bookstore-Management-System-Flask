@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+  </head>
+  <body>
+    <h1>Checkout</h1>
+    <ul>
+      {% for item in items %}
+      <li>
+        {{ item.book.title }} - ${{ item.book.price }} x {{ item.quantity }}
+      </li>
+      {% endfor %}
+    </ul>
+    <p>Total: ${{ total_price }}</p>
+    <form method="POST" action="{{ url_for('checkout') }}">
+      <p>
+        <label for="card_number">Card Number</label><br />
+        <input type="text" name="card_number" id="card_number" />
+      </p>
+      <p>
+        <label for="expiration_date">Expiration Date</label><br />
+        <input type="text" name="expiration_date" id="expiration_date" />
+      </p>
+      <p>
+        <label for="cvv">CVV</label><br />
+        <input type="text" name="cvv" id="cvv" />
+      </p>
+      <p><button type="submit">Place Order</button></p>
+    </form>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+  </body>
+</html>

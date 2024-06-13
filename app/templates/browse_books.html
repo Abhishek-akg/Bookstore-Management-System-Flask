@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browse Books</title>
+  </head>
+  <body>
+    <h1>Browse Books</h1>
+    <form method="POST" action="{{ url_for('browse_books') }}">
+      {{ search_form.hidden_tag() }}
+      <p>
+        {{ search_form.search.label }}<br />
+        {{ search_form.search(size=32) }}<br />
+        {{ search_form.submit() }}
+      </p>
+    </form>
+    <form method="POST" action="{{ url_for('browse_books') }}">
+      {{ filter_form.hidden_tag() }}
+      <p>
+        {{ filter_form.category.label }}<br />
+        {{ filter_form.category() }}<br />
+        {{ filter_form.min_price.label }}<br />
+        {{ filter_form.min_price() }}<br />
+        {{ filter_form.max_price.label }}<br />
+        {{ filter_form.max_price() }}<br />
+        {{ filter_form.submit() }}
+      </p>
+    </form>
+    <ul>
+      {% for book in books %}
+      <li>
+        {{ book.title }} by {{ book.author }} - ${{ book.price }} ({{
+        book.quantity_in_stock }} in stock)
+        <a href="{{ url_for('add_to_cart', book_id=book.id) }}">Add to Cart</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+  </body>
+</html>

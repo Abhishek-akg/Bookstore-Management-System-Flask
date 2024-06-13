@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Report</title>
+  </head>
+  <body>
+    <h1>Inventory Report</h1>
+    <ul>
+      {% for book in books %}
+      <li>
+        {{ book.title }} by {{ book.author }} - ${{ book.price }} ({{
+        book.quantity_in_stock }} in stock)
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+  </body>
+</html>
